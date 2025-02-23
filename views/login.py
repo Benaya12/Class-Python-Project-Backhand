@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify 
-from flask_cors import CORS 
-import os
+from flask import request, jsonify 
 
-@app.route('/login', methods=['GET'])
-def login():
-    pass
+class Login:
+    def __init__(self, app):
+        app.add_url_rule('/login', view_func=self.login, methods=['POST'])
+    
+    def login(self):
+        pass

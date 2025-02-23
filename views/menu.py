@@ -1,25 +1,16 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from dotenv import load_dotenv
-import os
+from flask import request, jsonify
 
+class Menu:
+    def __init__(self, app):
+        app.add_url_rule('/menu', view_func=self.addMeal, methods=['POST'])
+        app.add_url_rule('/menu', view_func=self.deleteMeal, methods=['DELETE'])
+        app.add_url_rule('/menu', view_func=self.editMeal, methods=['PUT'])
+    
+    def addMeal(self):
+        pass
 
+    def deleteMeal(self):
+        pass
 
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-# Manage menu
-@app.route('/test', methods=['POST'])
-def addMeal():
-    pass
-
-@app.route('/test', methods=['DELETE'])
-def deleteMeal():
-    pass
-
-@app.route('/test', methods=['GET, POST'])
-def editMeal():
-    pass
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    def editMeal(self):
+        pass

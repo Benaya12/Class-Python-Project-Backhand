@@ -14,6 +14,13 @@ from models.table import Table
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 
+# Views
+from views.orders import Orders
+from views.menu import Menu
+from views.login import Login
+from views.cashier import Cashier
+from views.meals import Meals
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -28,13 +35,16 @@ with app.app_context():
         create_database(engine.url)
     db.create_all()
 
-@app.route('/test', methods=['GET'])
-def get_books():
-    return jsonify({'message': 'Hello, World!'})
 
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+
+    Orders(app)
+    Menu(app)
+    Login(app)
+    Cashier(app)
+    Meals(app)
 
     app.run(debug=True)

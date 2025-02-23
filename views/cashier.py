@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify 
-from flask_cors import CORS 
-import os
+from flask import request, jsonify 
 
-@app.route('/cashier', methods=['GET'])
-def display_cashier():
-    pass
+class Cashier:
+    def __init__(self, app):
+        app.add_url_rule('/cashier', view_func=self.display_cashier, methods=['GET'])
+
+    def display_cashier(self):
+        pass
