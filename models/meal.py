@@ -6,4 +6,4 @@ class Meal(db.Model):
     price = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(100), nullable=False)
-    foodType = db.Collumn(db.Integer, db.ForeignKey('food_type.id'), nullable=False)
+    foodType = db.Column(db.Integer, db.ForeignKey('food_type.id'), nullable=False)
