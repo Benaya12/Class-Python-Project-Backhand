@@ -1,34 +1,31 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from dotenv import load_dotenv
-from models import db
-import os
-<<<<<<< Updated upstream
+
 from config import Config
+
+# Database models
+from models import db
 from models.admin import Admin
 from models.foodType import FoodType
 from models.meal import Meal
 from models.mealsInOrder import MealsInOrder
 from models.order import Order
 from models.table import Table
-
-=======
-from models.user import db, User
-from config import Config
->>>>>>> Stashed changes
+from sqlalchemy import create_engine
+from sqlalchemy_utils import database_exists, create_database
 
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 app.config.from_object(Config)
-<<<<<<< Updated upstream
 db.init_app(app)
-=======
->>>>>>> Stashed changes
 
-db.init_app(app)
+
 
 with app.app_context():
+    engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    if not database_exists(engine.url):
+        create_database(engine.url)
     db.create_all()
 
 @app.route('/test', methods=['GET'])
