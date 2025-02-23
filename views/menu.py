@@ -8,11 +8,6 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-
-@app.route('/test', methods=['GET'])
-def get_books():
-    return jsonify({'message': 'Hello, World!'})
-
 # Manage menu
 @app.route('/test', methods=['POST'])
 def addServing():
