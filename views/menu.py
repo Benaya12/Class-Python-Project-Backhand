@@ -18,7 +18,7 @@ def deleteMeal():
     pass
 
 @app.route('/test', methods=['GET, POST'])
-def changeMeal():
+def editMeal():
     pass
 
 if __name__ == '__main__':
