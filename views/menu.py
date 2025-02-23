@@ -10,15 +10,15 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Manage menu
 @app.route('/test', methods=['POST'])
-def addServing():
+def addMeal():
     pass
 
 @app.route('/test', methods=['DELETE'])
-def deleteServing():
+def deleteMeal():
     pass
 
 @app.route('/test', methods=['GET, POST'])
-def changeServing():
+def changeMeal():
     pass
 
 if __name__ == '__main__':
