@@ -8,22 +8,17 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-
-@app.route('/test', methods=['GET'])
-def get_books():
-    return jsonify({'message': 'Hello, World!'})
-
 # Manage menu
 @app.route('/test', methods=['POST'])
-def addServing():
+def addMeal():
     pass
 
 @app.route('/test', methods=['DELETE'])
-def deleteServing():
+def deleteMeal():
     pass
 
 @app.route('/test', methods=['GET, POST'])
-def changeServing():
+def changeMeal():
     pass
 
 if __name__ == '__main__':
