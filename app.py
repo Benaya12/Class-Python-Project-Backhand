@@ -5,7 +5,7 @@ from config import Config
 
 # Database models
 from models import db
-from models.admin import Admin
+from models.employees import Employee
 from models.foodType import FoodType
 from models.meal import Meal
 from models.mealsInOrder import MealsInOrder
