@@ -6,11 +6,17 @@ from config import Config
 # Database models
 from models import db
 from models.employees import Employee
+from models.role import Role
 from models.foodType import FoodType
 from models.meal import Meal
 from models.mealsInOrder import MealsInOrder
 from models.order import Order
 from models.table import Table
+from models.user import User
+from models.optional import Optional
+from models.mealsOptions import MealsOptions
+from models.alergies import Alergies
+
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 
