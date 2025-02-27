@@ -25,7 +25,7 @@ from views.orders import Orders
 from views.menu import Menu
 from views.login import Login
 from views.cashier import Cashier
-from views.meals import Meals
+from views.meal import Meals
 
 
 app = Flask(__name__)
