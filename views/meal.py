@@ -29,9 +29,26 @@ class Meal:
             return jsonify({'error': 'Failed to add meal', 'message': str(e)}), 500
 
 
-
     def getMeals(self):
-        pass
+        try:
+            meals = Meal.query.all()  # Get all the meals from the database
+            meals_list = [{
+                'id': meal.id,
+                'name': meal.name,
+                'price': meal.price,
+                'image': meal.image,
+                'description': meal.description,
+                'foodType': meal.foodType
+            } for meal in meals]  # Create a list of meal dictionaries
+            return jsonify({
+                'message': 'Meals retrieved successfully',
+                'meals': meals_list
+            }), 200
+        except Exception as e:
+            return jsonify({
+                'error': 'Failed to retrieve meals',
+                'message': str(e)
+            }), 500
 
     def removeMeal(self):
         pass
