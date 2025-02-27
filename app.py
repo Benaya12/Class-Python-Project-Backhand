@@ -24,8 +24,7 @@ from sqlalchemy_utils import database_exists, create_database
 from views.orders import Orders
 from views.menu import Menu
 from views.login import Login
-from views.cashier import Cashier
-from views.meal import Meals
+from views.meal import Meal
 
 
 app = Flask(__name__)
@@ -50,7 +49,6 @@ if __name__ == '__main__':
     Orders(app)
     Menu(app)
     Login(app)
-    Cashier(app)
-    Meals(app)
+    Meal(app)
 
     app.run(debug=True)
