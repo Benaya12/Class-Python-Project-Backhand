@@ -8,7 +8,7 @@ class Meal:
         self.app = app
         self.app.add_url_rule('/meal', 'get_meal', self.getMeals, methods=['GET'])
         self.app.add_url_rule('/meal', 'add_meal', self.addMeal, methods=['POST'])
-        self.app.add_url_rule('/meal/<int:meal_id>', 'remove_meal', self.removeMeal, methods=['DELETE'])
+        self.app.add_url_rule('/meal', 'remove_meal', self.removeMeal, methods=['DELETE'])
         self.app.add_url_rule('/meal', 'edit_meal', self.editMeal, methods=['PUT'])
     
     def addMeal(self):
@@ -50,9 +50,10 @@ class Meal:
                 'message': str(e)
             }), 500
 
-    def removeMeal(self,meal_id):
+    def removeMeal(self):
+        data = request.get_json()
         try:
-            meal = db.session.get(Meal, meal_id)  # Get the meal by ID
+            meal = db.session.get(Meal, data['id'])  # Get the meal by ID
             if not meal:
                 return jsonify({'error': 'Meal not found'}), 404
             db.session.delete(meal)  # Delete the meal
@@ -63,7 +64,21 @@ class Meal:
             return jsonify({'error': 'Failed to delete meal', 'message': str(e)}), 500
 
     def editMeal(self):
-        pass
+        data = request.get_json()
+        try:
+            meal = db.session.get(Meal, data['id'])  # Get the meal by ID
+            if not meal:
+                return jsonify({'error': 'Meal not found'}), 404
+            meal.name=data['name']  # Set the title of the new meal
+            meal.price=data['price']
+            meal.image=data['image']
+            meal.description=data['description']
+            meal.foodType=data['foodType']
+            db.session.commit()  # Commit the changes
+            return jsonify({'message': 'Meal updated successfully'}), 200
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            return jsonify({'error': 'Failed to update meal', 'message': str(e)}), 500
 
 
 
