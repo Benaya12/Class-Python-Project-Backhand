@@ -1,17 +1,17 @@
 from flask import request, jsonify
 
 from models import db
+from models.meal import Meal
 
-
-class Meal:
+class MealView:
     def __init__(self, app):
         self.app = app
-        self.app.add_url_rule('/meal', 'get_meal', self.getMeals, methods=['GET'])
-        self.app.add_url_rule('/meal', 'add_meal', self.addMeal, methods=['POST'])
-        self.app.add_url_rule('/meal', 'remove_meal', self.removeMeal, methods=['DELETE'])
-        self.app.add_url_rule('/meal', 'edit_meal', self.editMeal, methods=['PUT'])
+        self.app.add_url_rule('/meal', 'get_meal', self.get_meals, methods=['GET'])
+        self.app.add_url_rule('/meal', 'add_meal', self.add_meal, methods=['POST'])
+        self.app.add_url_rule('/meal', 'remove_meal', self.remove_meal, methods=['DELETE'])
+        self.app.add_url_rule('/meal', 'edit_meal', self.edit_meal, methods=['PUT'])
     
-    def addMeal(self):
+    def add_meal(self):
         data = request.json  # Parse the JSON data from the request body
         try:
             new_meal = Meal(
@@ -30,13 +30,31 @@ class Meal:
 
 
 
-    def getMeals(self):
+    def get_meals(self):
+        try:
+            meals = Meal.query.all()  # Get all the meals from the database
+            meals_list = [{
+                'id': meal.id,
+                'name': meal.name,
+                'price': meal.price,
+                'image': meal.image,
+                'description': meal.description,
+                'foodType': meal.foodType
+            } for meal in meals]  # Create a list of meal dictionaries
+            return jsonify({
+                'message': 'Meals retrieved successfully',
+                'meals': meals_list
+            }), 200
+        except Exception as e:
+            return jsonify({
+                'error': 'Failed to retrieve meals',
+                'message': str(e)
+            }), 500
+
+    def remove_meal(self):
         pass
 
-    def removeMeal(self):
-        pass
-
-    def editMeal(self):
+    def edit_meal(self):
         pass
 
 
