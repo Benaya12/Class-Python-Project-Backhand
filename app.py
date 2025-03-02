@@ -25,6 +25,7 @@ from views.orders import Orders
 from views.menu import Menu
 from views.login import Login
 from views.meal import MealView
+from views.emmployee import EmployeeView
 
 
 app = Flask(__name__)
@@ -50,5 +51,6 @@ if __name__ == '__main__':
     Menu(app)
     Login(app)
     MealView(app)
+    EmployeeView(app)
 
     app.run(debug=True)
