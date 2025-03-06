@@ -2,6 +2,7 @@ from flask import request, jsonify
 
 from models import db
 from models.meal import Meal
+from models.foodType import FoodType
 
 class MealView:
     def __init__(self, app):
@@ -33,13 +34,14 @@ class MealView:
     def get_meals(self):
         try:
             meals = Meal.query.all()  # Get all the meals from the database
+
             meals_list = [{
                 'id': meal.id,
                 'name': meal.name,
                 'price': meal.price,
                 'image': meal.image,
                 'description': meal.description,
-                'foodType': meal.foodType
+                'foodType': FoodType.query.filter_by(id=meal.foodType).first().name
             } for meal in meals]  # Create a list of meal dictionaries
             return jsonify({
                 'message': 'Meals retrieved successfully',
