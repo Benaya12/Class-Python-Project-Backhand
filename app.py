@@ -26,6 +26,7 @@ from views.menu import Menu
 from views.login import Login
 from views.meal import MealView
 from views.emmployee import EmployeeView
+from views.foodtype import FoodTypeView
 
 
 app = Flask(__name__)
@@ -52,6 +53,7 @@ if __name__ == '__main__':
     Login(app)
     MealView(app)
     EmployeeView(app)
+    FoodTypeView(app)
 
     app.run(host="0.0.0.0", port=5000, debug=True)
 

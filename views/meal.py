@@ -54,7 +54,7 @@ class MealView:
             }), 500
 
     def remove_meal(self):
-        data = request.get_json()
+        data = request.json
         try:
             meal = db.session.get(Meal, data['id'])  # Get the meal by ID
             if not meal:
@@ -67,16 +67,16 @@ class MealView:
             return jsonify({'error': 'Failed to delete meal', 'message': str(e)}), 500
 
     def edit_meal(self):
-        data = request.get_json()
+        data = request.json
         try:
             meal = db.session.get(Meal, data['id'])  # Get the meal by ID
             if not meal:
                 return jsonify({'error': 'Meal not found'}), 404
-            meal.name=data['name']  # Set the title of the new meal
-            meal.price=data['price']
-            meal.image=data['image']
-            meal.description=data['description']
-            meal.foodType=data['foodType']
+            meal.name = data['name']  # Set the title of the new meal
+            meal.price = data['price']
+            meal.image = data['image']
+            meal.description = data['description']
+            meal.foodType = data['foodType']
             db.session.commit()  # Commit the changes
             return jsonify({'message': 'Meal updated successfully'}), 200
         except Exception as e:

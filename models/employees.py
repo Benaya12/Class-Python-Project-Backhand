@@ -6,4 +6,3 @@ class Employee(db.Model):
     username = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(20), nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
-    salary = db.Column(db.Float, nullable=False)
